@@ -3,6 +3,7 @@
 import { Expense, categoryEquivalent, typeEquivalent } from '@/@types/expense'
 import { moneyFormatter } from '@/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
+import { ArrowUpDown } from 'lucide-react'
 
 export const columns: ColumnDef<Expense>[] = [
   {
@@ -18,21 +19,51 @@ export const columns: ColumnDef<Expense>[] = [
   },
   {
     accessorKey: 'amount',
-    header: 'Valor',
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-2 hover:underline"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Valor
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </button>
+      )
+    },
     cell: ({ row }) => {
       return <div>{moneyFormatter(row.original.amount)}</div>
     },
   },
   {
     accessorKey: 'data',
-    header: 'Data de criação',
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-2 hover:underline"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Data de criação
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </button>
+      )
+    },
     cell: ({ row }) => {
       return <div>{new Date(row.original.date).toDateString()}</div>
     },
   },
   {
     accessorKey: 'type',
-    header: 'Tipo',
+    header: ({ column }) => {
+      return (
+        <button
+          className="flex items-center gap-2 hover:underline"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Tipo
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </button>
+      )
+    },
     cell: ({ row }) => {
       return <div>{typeEquivalent[row.original.type]}</div>
     },

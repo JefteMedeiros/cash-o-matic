@@ -2,10 +2,16 @@
 
 import {
   ColumnDef,
+  ColumnFiltersState,
+  SortingState,
+  getSortedRowModel,
+  getFilteredRowModel,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+
+import { Input } from '@/components/ui/input'
 
 import {
   Table,
@@ -15,6 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { useState } from 'react'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -25,14 +32,35 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [sorting, setSorting] = useState<SortingState>([])
+
   const table = useReactTable({
     data,
     columns,
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      columnFilters,
+      sorting,
+    },
   })
 
   return (
     <div className="rounded-md">
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="Filtrar por nome"
+          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+          onChange={(event) =>
+            table.getColumn('name')?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm bg-gray-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
+        />
+      </div>
       <Table className="text-white">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
