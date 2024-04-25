@@ -18,7 +18,7 @@ import {
 import { Expense } from '@/@types/expense'
 import { useFormContext } from 'react-hook-form'
 
-export function AddExpenseForm() {
+export function ExpenseForm() {
   const form = useFormContext<Expense>()
 
   return (

@@ -16,6 +16,7 @@ export const typeEquivalent = {
 }
 
 export const expenseSchema = z.object({
+  id: z.string(),
   name: z.string().min(1, { message: 'Este campo é obrigatório.' }),
   category: z.enum([
     'other',

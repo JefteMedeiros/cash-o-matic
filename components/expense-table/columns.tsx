@@ -4,6 +4,7 @@ import { Expense, categoryEquivalent, typeEquivalent } from '@/@types/expense'
 import { moneyFormatter } from '@/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
+import { EditExpense } from '../edit-expense'
 
 export const columns: ColumnDef<Expense>[] = [
   {
@@ -65,7 +66,14 @@ export const columns: ColumnDef<Expense>[] = [
       )
     },
     cell: ({ row }) => {
-      return <div>{typeEquivalent[row.original.type]}</div>
+      return (
+        <div className="flex items-center justify-between">
+          {typeEquivalent[row.original.type]}
+          <div className="flex flex-col gap-4 items-center">
+            <EditExpense expense={row.original} />
+          </div>
+        </div>
+      )
     },
   },
 ]
