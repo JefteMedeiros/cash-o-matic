@@ -2,16 +2,24 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
 import * as z from 'zod'
-import { Form, FormControl, FormField, FormItem, FormMessage } from './ui/form'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from './ui/form'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
+import { RadioGroup, RadioGroupItem } from './ui/radio-group'
 
 const expenseSchema = z.object({
   name: z.string(),
   category: z.string(),
   amount: z.coerce.number().min(1),
-  isPaid: z.boolean(),
   date: z.date(),
+  type: z.enum(['unique', 'recurring']),
 })
 
 type Schema = z.infer<typeof expenseSchema>
@@ -22,8 +30,8 @@ export function AddExpenseForm() {
       name: '',
       category: '',
       amount: 0,
-      isPaid: false,
       date: new Date(),
+      type: 'unique',
     },
     resolver: zodResolver(expenseSchema),
   })
@@ -81,6 +89,46 @@ export function AddExpenseForm() {
                   placeholder="Valor"
                   {...field}
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="type"
+          render={({ field }) => (
+            <FormItem className="space-y-3">
+              <FormLabel className="text-white">Tipo de despesa</FormLabel>
+              <FormControl>
+                <RadioGroup
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  className="flex flex-col space-y-1"
+                >
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem
+                        className="border-zinc-900"
+                        value="unique"
+                      />
+                    </FormControl>
+                    <FormLabel className="font-normal text-white">
+                      Despesa única
+                    </FormLabel>
+                  </FormItem>
+                  <FormItem className="flex items-center space-x-3 space-y-0">
+                    <FormControl>
+                      <RadioGroupItem
+                        className="border-zinc-900"
+                        value="mentions"
+                      />
+                    </FormControl>
+                    <FormLabel className="font-normal text-white">
+                      Despesa recorrente
+                    </FormLabel>
+                  </FormItem>
+                </RadioGroup>
               </FormControl>
               <FormMessage />
             </FormItem>
