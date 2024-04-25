@@ -109,7 +109,7 @@ export function AddExpenseForm() {
                   <FormControl>
                     <RadioGroupItem
                       className="border-gray-900"
-                      value="mentions"
+                      value="recurring"
                     />
                   </FormControl>
                   <FormLabel className="font-normal text-white">

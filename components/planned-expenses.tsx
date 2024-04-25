@@ -1,6 +1,6 @@
 'use client'
 
-import { useLocalStorage } from '@uidotdev/usehooks'
+import { useLocalStorage } from 'usehooks-ts'
 
 import { ChangeEvent, useState } from 'react'
 import {
@@ -30,6 +30,7 @@ export function PlannedExpenses({
   const [isFirstAccess, setIsFirstAccess] = useLocalStorage(
     'firstAccess',
     'true',
+    { initializeWithValue: false },
   )
 
   const greetingMessage =

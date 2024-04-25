@@ -15,12 +15,11 @@ import { AddExpenseForm } from '@/components/add-expense-form'
 import { Expense, expenseSchema } from '@/@types/expense'
 import { Form } from './ui/form'
 import { useForm } from 'react-hook-form'
+import { useExpenseStore } from '@/store/expense-store'
 
-interface Props {
-  handleAddExpense: (expense: Expense) => void
-}
+export function AddExpense() {
+  const { handleAddExpense } = useExpenseStore()
 
-export function AddExpense({ handleAddExpense }: Props) {
   const [open, setIsOpen] = useState(false)
 
   const [expenseExample, setExpenseExample] = useState(() =>
