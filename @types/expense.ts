@@ -16,7 +16,7 @@ export const typeEquivalent = {
 }
 
 export const expenseSchema = z.object({
-  name: z.string(),
+  name: z.string().min(1, { message: 'Este campo é obrigatório.' }),
   category: z.enum([
     'other',
     'entertainment',
@@ -26,7 +26,7 @@ export const expenseSchema = z.object({
     'health',
     'education',
   ]),
-  amount: z.coerce.number().min(1),
+  amount: z.coerce.number().min(1, { message: 'Este campo é obrigatório.' }),
   date: z.date(),
   type: z.enum(['unique', 'recurring']),
 })

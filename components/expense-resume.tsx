@@ -40,8 +40,7 @@ export function ExpenseResume() {
         <span className="text-white">Total gasto</span>
         <p
           className={cn('font-bold text-3xl text-white', {
-            'text-green-500': remainingValue > plannedExpenseValue / 3,
-            'text-yellow-500': remainingValue < plannedExpenseValue / 3,
+            'text-green-500': totalSpent > plannedExpenseValue / 3,
             'text-red-500': totalSpent > plannedExpenseValue,
           })}
         >
@@ -53,7 +52,6 @@ export function ExpenseResume() {
         <p
           className={cn('font-bold text-3xl text-white', {
             'text-green-500': remainingValue > 0,
-            'text-yellow-500': totalSpent > plannedExpenseValue / 3,
             'text-red-500': remainingValue < 0,
           })}
         >
