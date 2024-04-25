@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { useEffect, useState } from 'react'
-import { AddExpenseForm } from './add-expense-form'
+import { AddExpenseForm } from '@/components/add-expense-form'
 
 export function AddExpense() {
   const [open, setIsOpen] = useState(false)
