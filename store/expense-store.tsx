@@ -8,6 +8,7 @@ interface ExpenseStore {
   totalExpenses: Expense[]
   handleAddExpense: (expense: Expense) => void
   handleEditExpense: (expense: Expense) => void
+  handleDeleteExpense: (id: string) => void
 }
 
 const expenseStore = createContext({} as ExpenseStore)
@@ -35,9 +36,20 @@ export function ExpenseProvider({ children }: Props) {
     setTotalExpenses(updatedExpenses)
   }
 
+  const handleDeleteExpense = (id: string) => {
+    const updatedExpenses = totalExpenses.filter((expense) => expense.id !== id)
+
+    setTotalExpenses(updatedExpenses)
+  }
+
   return (
     <expenseStore.Provider
-      value={{ totalExpenses, handleAddExpense, handleEditExpense }}
+      value={{
+        totalExpenses,
+        handleAddExpense,
+        handleEditExpense,
+        handleDeleteExpense,
+      }}
     >
       {children}
     </expenseStore.Provider>
@@ -45,8 +57,17 @@ export function ExpenseProvider({ children }: Props) {
 }
 
 export function useExpenseStore() {
-  const { totalExpenses, handleAddExpense, handleEditExpense } =
-    useContext(expenseStore)
+  const {
+    totalExpenses,
+    handleAddExpense,
+    handleEditExpense,
+    handleDeleteExpense,
+  } = useContext(expenseStore)
 
-  return { totalExpenses, handleAddExpense, handleEditExpense }
+  return {
+    totalExpenses,
+    handleAddExpense,
+    handleEditExpense,
+    handleDeleteExpense,
+  }
 }

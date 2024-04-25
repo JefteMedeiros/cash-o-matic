@@ -5,6 +5,7 @@ import { moneyFormatter } from '@/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
 import { EditExpense } from '../edit-expense'
+import { DeleteExpense } from '../delete-expense'
 
 export const columns: ColumnDef<Expense>[] = [
   {
@@ -69,8 +70,9 @@ export const columns: ColumnDef<Expense>[] = [
       return (
         <div className="flex items-center justify-between">
           {typeEquivalent[row.original.type]}
-          <div className="flex flex-col gap-4 items-center">
+          <div className="flex gap-4 items-center">
             <EditExpense expense={row.original} />
+            <DeleteExpense id={row.original.id} />
           </div>
         </div>
       )
