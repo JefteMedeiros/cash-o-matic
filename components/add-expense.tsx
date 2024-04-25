@@ -8,11 +8,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { useEffect, useState } from 'react'
 import { AddExpenseForm } from '@/components/add-expense-form'
+import { Expense, expenseSchema } from '@/@types/expense'
+import { Form } from './ui/form'
+import { useForm } from 'react-hook-form'
 
-export function AddExpense() {
+interface Props {
+  handleAddExpense: (expense: Expense) => void
+}
+
+export function AddExpense({ handleAddExpense }: Props) {
   const [open, setIsOpen] = useState(false)
 
   const [expenseExample, setExpenseExample] = useState(() =>
@@ -26,6 +34,23 @@ export function AddExpense() {
     setExpenseExample(generateExpenseExampleMessage())
   }, [open])
 
+  const form = useForm<Expense>({
+    defaultValues: {
+      name: '',
+      category: 'other',
+      amount: 0,
+      date: new Date(),
+      type: 'unique',
+    },
+    resolver: zodResolver(expenseSchema),
+  })
+
+  const onSubmit = (data: Expense) => {
+    handleAddExpense(data)
+    setIsOpen(false)
+    form.reset()
+  }
+
   return (
     <Dialog open={open} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -38,7 +63,14 @@ export function AddExpense() {
             {expenseExample}
           </DialogDescription>
         </DialogHeader>
-        <AddExpenseForm />
+        <Form {...form}>
+          <form
+            className="flex flex-col gap-4 text-gray-800"
+            onSubmit={form.handleSubmit(onSubmit)}
+          >
+            <AddExpenseForm />
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   )
