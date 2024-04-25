@@ -56,7 +56,7 @@ export function AddExpenseForm() {
   return (
     <Form {...form}>
       <form
-        className="flex flex-col gap-4 text-zinc-800"
+        className="flex flex-col gap-4 text-gray-800"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FormField
@@ -66,7 +66,7 @@ export function AddExpenseForm() {
             <FormItem>
               <FormControl>
                 <Input
-                  className="bg-zinc-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-zinc-800  focus-visible:ring-purple-400"
+                  className="bg-gray-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
                   placeholder="Nome"
                   {...field}
                 />
@@ -82,11 +82,11 @@ export function AddExpenseForm() {
             <FormItem>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger className="bg-zinc-900 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-zinc-800  focus:ring-purple-400">
+                  <SelectTrigger className="bg-gray-900 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-gray-800  focus:ring-purple-400">
                     <SelectValue placeholder="Select a verified email to display" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent className="bg-zinc-900 text-white border-none">
+                <SelectContent className="bg-gray-900 text-white border-none">
                   <SelectItem value="other">Outros</SelectItem>
                   <SelectItem value="entertainment">Entretenimeno</SelectItem>
                   <SelectItem value="food">Alimentação</SelectItem>
@@ -108,7 +108,7 @@ export function AddExpenseForm() {
               <FormControl>
                 <Input
                   step="any"
-                  className="bg-zinc-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-zinc-800  focus-visible:ring-purple-400"
+                  className="bg-gray-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
                   type="number"
                   placeholder="Valor"
                   {...field}
@@ -133,7 +133,7 @@ export function AddExpenseForm() {
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem
-                        className="border-zinc-900"
+                        className="border-gray-900"
                         value="unique"
                       />
                     </FormControl>
@@ -144,7 +144,7 @@ export function AddExpenseForm() {
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
                       <RadioGroupItem
-                        className="border-zinc-900"
+                        className="border-gray-900"
                         value="mentions"
                       />
                     </FormControl>

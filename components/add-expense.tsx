@@ -31,7 +31,7 @@ export function AddExpense() {
       <DialogTrigger asChild>
         <Button>Adicionar despesa</Button>
       </DialogTrigger>
-      <DialogContent className="bg-zinc-800 text-white border-none">
+      <DialogContent className="bg-gray-800 text-white border-none">
         <DialogHeader>
           <DialogTitle>Adicionar despesa</DialogTitle>
           <DialogDescription className="text-white text-sm font-extralight">
