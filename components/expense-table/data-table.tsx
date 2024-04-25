@@ -22,6 +22,13 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { useState } from 'react'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -51,15 +58,58 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md">
-      <div className="flex items-center py-4">
+      <div className="grid grid-cols-3 gap-2 py-4">
         <Input
           placeholder="Filtrar por nome"
           value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
             table.getColumn('name')?.setFilterValue(event.target.value)
           }
-          className="max-w-sm bg-gray-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
+          className="bg-gray-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
         />
+        <Select
+          value={
+            (table.getColumn('category')?.getFilterValue() as string) ?? ''
+          }
+          onValueChange={(value) => {
+            value === 'all'
+              ? table.getColumn('category')?.setFilterValue('')
+              : table.getColumn('category')?.setFilterValue(value)
+          }}
+          defaultValue="all"
+        >
+          <SelectTrigger className="bg-gray-900 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-gray-800  focus:ring-purple-400">
+            <SelectValue placeholder="Filtrar por categoria" />
+          </SelectTrigger>
+          <SelectContent className="bg-gray-900 text-white border-none">
+            <SelectItem value="all">Todos</SelectItem>
+            <SelectItem value="other">Outros</SelectItem>
+            <SelectItem value="entertainment">Entretenimeno</SelectItem>
+            <SelectItem value="food">Alimentação</SelectItem>
+            <SelectItem value="transport">Transporte</SelectItem>
+            <SelectItem value="housing">Moradia</SelectItem>
+            <SelectItem value="health">Saúde</SelectItem>
+            <SelectItem value="education">Educação</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select
+          value={(table.getColumn('type')?.getFilterValue() as string) ?? ''}
+          onValueChange={(value) => {
+            value === 'all'
+              ? table.getColumn('type')?.setFilterValue('')
+              : table.getColumn('type')?.setFilterValue(value)
+          }}
+          defaultValue="all"
+        >
+          <SelectTrigger className="bg-gray-900 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-gray-800  focus:ring-purple-400">
+            <SelectValue placeholder="Filtrar por categoria" />
+          </SelectTrigger>
+          <SelectContent className="bg-gray-900 text-white border-none">
+            <SelectItem value="all">Todos</SelectItem>
+            <SelectItem value="unique">Única</SelectItem>
+            <SelectItem value="recurring">Recorrente</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       <Table className="text-white">
         <TableHeader>
@@ -115,9 +165,12 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))
           ) : (
-            <TableRow className="hover:bg-gray-800">
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                Nenhuma despesa adicionada.
+            <TableRow className="hover:bg-gray-700">
+              <TableCell
+                colSpan={columns.length}
+                className="h-20 text-center rounded-bl-[5px] rounded-br-[5px]"
+              >
+                Nenhuma despesa encontrada.
               </TableCell>
             </TableRow>
           )}
