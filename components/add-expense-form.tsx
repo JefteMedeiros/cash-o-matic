@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import * as z from 'zod'
 import {
   Form,
   FormControl,
@@ -20,27 +19,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select'
-
-const expenseSchema = z.object({
-  name: z.string(),
-  category: z.enum([
-    'other',
-    'entertainment',
-    'food',
-    'transport',
-    'housing',
-    'health',
-    'education',
-  ]),
-  amount: z.coerce.number().min(1),
-  date: z.date(),
-  type: z.enum(['unique', 'recurring']),
-})
-
-type Schema = z.infer<typeof expenseSchema>
+import { Expense, expenseSchema } from '@/@types/expense'
 
 export function AddExpenseForm() {
-  const form = useForm<Schema>({
+  const form = useForm<Expense>({
     defaultValues: {
       name: '',
       category: 'other',
@@ -51,7 +33,7 @@ export function AddExpenseForm() {
     resolver: zodResolver(expenseSchema),
   })
 
-  const onSubmit = (data: Schema) => console.log(data)
+  const onSubmit = (data: Expense) => console.log(data)
 
   return (
     <Form {...form}>
