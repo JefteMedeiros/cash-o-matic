@@ -102,12 +102,12 @@ export function DataTable<TData, TValue>({
           defaultValue="all"
         >
           <SelectTrigger className="bg-gray-900 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-gray-800  focus:ring-purple-400">
-            <SelectValue placeholder="Filtrar por categoria" />
+            <SelectValue placeholder="Filtrar por tipo" />
           </SelectTrigger>
           <SelectContent className="bg-gray-900 text-white border-none">
-            <SelectItem value="all">Todos</SelectItem>
-            <SelectItem value="unique">Única</SelectItem>
-            <SelectItem value="recurring">Recorrente</SelectItem>
+            <SelectItem value="all">Todas</SelectItem>
+            <SelectItem value="unique">Despesa única</SelectItem>
+            <SelectItem value="recurring">Despesa recorrente</SelectItem>
           </SelectContent>
         </Select>
       </div>
