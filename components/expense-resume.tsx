@@ -41,7 +41,7 @@ export function ExpenseResume({ totalExpenses }: Props) {
           />
         </div>
       </div>
-      <div className="snap-center flex flex-col items-start shrink-0 w-64 md:flex-1 md:w-full justify-center gap-4 bg-gray-700 rounded-md h-36 p-6">
+      <div className="snap-center flex flex-col items-start shrink-0 w-64 md:flex-1 md:w-full justify-center gap-4 bg-gray-700 rounded-md h-32 md:h-36 p-6">
         <span className="text-white">Total gasto</span>
         <p
           className={cn('font-bold text-2xl md:text-3xl text-white', {
@@ -52,7 +52,7 @@ export function ExpenseResume({ totalExpenses }: Props) {
           {moneyFormatter(totalSpent)}
         </p>
       </div>
-      <div className="snap-center flex flex-col items-start shrink-0 w-64 md:flex-1 md:w-full justify-center gap-4 bg-gray-700 rounded-md h-36 p-6">
+      <div className="snap-center flex flex-col items-start shrink-0 w-64 md:flex-1 md:w-full justify-center gap-4 bg-gray-700 rounded-md h-32 md:h-36 p-6">
         <span className="text-white">Total restante</span>
         <p
           className={cn('font-bold text-2xl md:text-3xl text-white', {
