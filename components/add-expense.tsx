@@ -12,56 +12,37 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { useEffect, useState } from 'react'
 import { ExpenseForm } from '@/components/expense-form'
-import { Expense, expenseSchema } from '@/@types/expense'
+import { ExpenseInput, expenseSchemaInput } from '@/@types/expense'
 import { Form } from './ui/form'
 import { useForm } from 'react-hook-form'
-import { useExpenseStore } from '@/store/expense-store'
 import { generateExpenseExampleMessage } from '@/lib/utils'
-import { v4 } from 'uuid'
+import { addExpense } from '@/actions/add_expense'
 
 export function AddExpense() {
-  const { handleAddExpense } = useExpenseStore()
-
   const [open, setIsOpen] = useState(false)
 
   const [expenseExample, setExpenseExample] = useState(() =>
     generateExpenseExampleMessage(),
   )
 
-  const [randomId, setRandomId] = useState(() => v4())
-
-  // Troca a mensagem a cada vez que o modal é aberto
-  // Reseta o ID também
-
   useEffect(() => {
     if (!open) return
     setExpenseExample(generateExpenseExampleMessage())
-    const newId = v4()
-    setRandomId(newId)
-    form.reset({
-      id: newId,
-      name: '',
-      category: 'other',
-      amount: 0,
-      date: new Date(),
-      type: 'unique',
-    })
   }, [open])
 
-  const form = useForm<Expense>({
+  const form = useForm<ExpenseInput>({
     defaultValues: {
-      id: randomId,
       name: '',
       category: 'other',
-      amount: 0,
-      date: new Date(),
-      type: 'unique',
+      value: 0,
+      date: new Date().toISOString(),
+      isUnique: 'false',
     },
-    resolver: zodResolver(expenseSchema),
+    resolver: zodResolver(expenseSchemaInput),
   })
 
-  const onSubmit = (data: Expense) => {
-    handleAddExpense(data)
+  const onSubmit = (data: ExpenseInput) => {
+    addExpense(data)
     setIsOpen(false)
   }
 

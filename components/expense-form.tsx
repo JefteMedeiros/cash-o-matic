@@ -15,11 +15,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Expense } from '@/@types/expense'
+import { ExpenseInput } from '@/@types/expense'
 import { useFormContext } from 'react-hook-form'
 
 export function ExpenseForm() {
-  const form = useFormContext<Expense>()
+  const form = useFormContext<ExpenseInput>()
 
   return (
     <>
@@ -52,7 +52,7 @@ export function ExpenseForm() {
               </FormControl>
               <SelectContent className="bg-gray-900 text-white border-none">
                 <SelectItem value="other">Outros</SelectItem>
-                <SelectItem value="entertainment">Entretenimeno</SelectItem>
+                <SelectItem value="entertainment">Entretenimento</SelectItem>
                 <SelectItem value="food">Alimentação</SelectItem>
                 <SelectItem value="transport">Transporte</SelectItem>
                 <SelectItem value="housing">Moradia</SelectItem>
@@ -66,7 +66,7 @@ export function ExpenseForm() {
       />
       <FormField
         control={form.control}
-        name="amount"
+        name="value"
         render={({ field }) => (
           <FormItem>
             <FormControl>
@@ -84,7 +84,7 @@ export function ExpenseForm() {
       />
       <FormField
         control={form.control}
-        name="type"
+        name="isUnique"
         render={({ field }) => (
           <FormItem className="space-y-3">
             <FormLabel className="text-white">Tipo de despesa</FormLabel>
@@ -96,10 +96,7 @@ export function ExpenseForm() {
               >
                 <FormItem className="flex items-center space-x-3 space-y-0">
                   <FormControl>
-                    <RadioGroupItem
-                      className="border-gray-900"
-                      value="unique"
-                    />
+                    <RadioGroupItem className="border-gray-900" value="true" />
                   </FormControl>
                   <FormLabel className="font-normal text-white">
                     Despesa única
@@ -107,10 +104,7 @@ export function ExpenseForm() {
                 </FormItem>
                 <FormItem className="flex items-center space-x-3 space-y-0">
                   <FormControl>
-                    <RadioGroupItem
-                      className="border-gray-900"
-                      value="recurring"
-                    />
+                    <RadioGroupItem className="border-gray-900" value="false" />
                   </FormControl>
                   <FormLabel className="font-normal text-white">
                     Despesa recorrente

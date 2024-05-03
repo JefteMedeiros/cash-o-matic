@@ -84,7 +84,7 @@ export function DataTable<TData, TValue>({
           <SelectContent className="bg-gray-900 text-white border-none">
             <SelectItem value="all">Todos</SelectItem>
             <SelectItem value="other">Outros</SelectItem>
-            <SelectItem value="entertainment">Entretenimeno</SelectItem>
+            <SelectItem value="entertainment">Entretenimento</SelectItem>
             <SelectItem value="food">Alimentação</SelectItem>
             <SelectItem value="transport">Transporte</SelectItem>
             <SelectItem value="housing">Moradia</SelectItem>

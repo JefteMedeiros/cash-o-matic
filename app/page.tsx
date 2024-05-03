@@ -3,6 +3,7 @@ import { ExpenseResume } from '@/components/expense-resume'
 import { ExpenseTable } from '@/components/expense-table'
 import { Logo } from '@/components/logo'
 import { ExpenseProvider } from '@/store/expense-store'
+import { Suspense } from 'react'
 
 export default function Page() {
   return (
@@ -15,7 +16,9 @@ export default function Page() {
           </div>
         </header>
         <ExpenseResume />
-        <ExpenseTable />
+        <Suspense fallback={<p>Loading...</p>}>
+          <ExpenseTable />
+        </Suspense>
       </ExpenseProvider>
     </div>
   )

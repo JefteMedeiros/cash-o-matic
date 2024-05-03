@@ -1,13 +1,13 @@
 'use client'
 
-import { Expense, categoryEquivalent, typeEquivalent } from '@/@types/expense'
 import { moneyFormatter } from '@/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
 import { EditExpense } from '../edit-expense'
 import { DeleteExpense } from '../delete-expense'
+import { SelectExpense } from '@/db/schema'
 
-export const columns: ColumnDef<Expense>[] = [
+export const columns: ColumnDef<SelectExpense>[] = [
   {
     accessorKey: 'name',
     header: 'Nome',
@@ -16,7 +16,7 @@ export const columns: ColumnDef<Expense>[] = [
     accessorKey: 'category',
     header: 'Categoria',
     cell: ({ row }) => {
-      return <div>{categoryEquivalent[row.original.category]}</div>
+      return <div>{row.original.category}</div>
     },
   },
   {
@@ -33,7 +33,7 @@ export const columns: ColumnDef<Expense>[] = [
       )
     },
     cell: ({ row }) => {
-      return <div>{moneyFormatter(row.original.amount)}</div>
+      return <div>{moneyFormatter(row.original.value)}</div>
     },
   },
   {
@@ -50,7 +50,7 @@ export const columns: ColumnDef<Expense>[] = [
       )
     },
     cell: ({ row }) => {
-      return <div>{new Date(row.original.date).toDateString()}</div>
+      return <div>{new Date(row.original.date as string).toDateString()}</div>
     },
   },
   {
@@ -69,7 +69,7 @@ export const columns: ColumnDef<Expense>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center justify-between">
-          {typeEquivalent[row.original.type]}
+          {row.original.isUnique ? 'Única' : 'Recorrente'}
           <div className="flex gap-4 items-center">
             <EditExpense expense={row.original} />
             <DeleteExpense id={row.original.id} />

@@ -1,0 +1,1 @@
+ALTER TABLE expenses ADD `date` text DEFAULT (CURRENT_DATE);
