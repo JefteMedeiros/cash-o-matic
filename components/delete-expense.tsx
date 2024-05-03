@@ -1,10 +1,20 @@
 import { Trash } from 'lucide-react'
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 import { useEffect, useState } from 'react'
-import { PopoverClose } from '@radix-ui/react-popover'
 import { Button } from './ui/button'
 import { deleteExpense } from '@/actions/delete_expense'
 import { useFormState } from 'react-dom'
+
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from './ui/alert-dialog'
+import { SubmitButton } from './submit-button'
 
 interface Props {
   id: string
@@ -27,37 +37,38 @@ export function DeleteExpense({ id }: Props) {
   }, [state])
 
   return (
-    <Popover open={isOpen} onOpenChange={setIsOpen}>
-      <PopoverTrigger>
-        <Trash className="text-purple-400" size={16} />
-      </PopoverTrigger>
-      <PopoverContent
-        align="end"
-        className="w-fit p-1 bg-gray-900 border-purple-400 text-white"
-      >
-        <span className="px-2 py-1.5 text-sm font-semibold">Tem certeza?</span>
-        <div className="-mx-1 my-1 h-px bg-gray-700" />
-        <div className="flex items-center gap-2 px-2 py-1.5">
-          <PopoverClose
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+      <AlertDialogTrigger asChild>
+        <button>
+          <Trash className="text-purple-400" size={16} />
+        </button>
+      </AlertDialogTrigger>
+      <AlertDialogContent className="bg-gray-800 max-w-[90%] xl:max-w-lg text-white border-none">
+        <AlertDialogHeader className="items-start">
+          <AlertDialogTitle>Deletar despesa</AlertDialogTitle>
+          <AlertDialogDescription className="text-white text-sm font-extralight">
+            Tem certeza que deseja deletar essa despesa?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel
             onClick={() => {
               setIsOpen(!isOpen)
             }}
             asChild
           >
             <Button
-              className="h-[28px] border-purple-400 border hover:text-white"
+              className="border-purple-400 w-full border hover:text-white"
               variant="outline"
             >
               Não
             </Button>
-          </PopoverClose>
-          <form action={formAction}>
-            <Button className="h-[28px]" type="submit">
-              Sim
-            </Button>
+          </AlertDialogCancel>
+          <form className="w-full" action={formAction}>
+            <SubmitButton text="Sim" />
           </form>
-        </div>
-      </PopoverContent>
-    </Popover>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   )
 }

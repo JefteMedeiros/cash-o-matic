@@ -5,7 +5,7 @@ import { db } from '@/db/db'
 import { expenses } from '@/db/schema'
 import { revalidatePath } from 'next/cache'
 
-export async function addExpense(formData: Expense) {
+export async function addExpense(prevState: any, formData: Expense) {
   const validFormData = expenseSchema.safeParse(formData)
 
   if (!validFormData.success) {

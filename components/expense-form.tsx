@@ -6,7 +6,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import {
   Select,
@@ -17,6 +16,7 @@ import {
 } from '@/components/ui/select'
 import { Expense } from '@/@types/expense'
 import { useFormContext } from 'react-hook-form'
+import { SubmitButton } from './submit-button'
 
 export function ExpenseForm() {
   const form = useFormContext<Expense>()
@@ -120,9 +120,7 @@ export function ExpenseForm() {
           </FormItem>
         )}
       />
-      <Button className="w-full h-12" type="submit">
-        Salvar
-      </Button>
+      <SubmitButton text="Salvar" />
     </>
   )
 }

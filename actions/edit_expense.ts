@@ -6,7 +6,7 @@ import { SelectExpense, expenses } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 
-export async function editExpense(formData: SelectExpense) {
+export async function editExpense(prevState: any, formData: SelectExpense) {
   const validFormData = expenseSchema.safeParse(formData)
 
   if (!validFormData.success) {

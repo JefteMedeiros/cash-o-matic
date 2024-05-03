@@ -77,8 +77,8 @@ export const columns: ColumnDef<SelectExpense>[] = [
     },
     cell: ({ row }) => {
       return (
-        <div className="flex items-center justify-between">
-          {row.original.isUnique ? 'Única' : 'Recorrente'}
+        <div className="flex gap-4 items-center justify-between">
+          <span>{row.original.isUnique ? 'Única' : 'Recorrente'}</span>
           <div className="flex gap-4 items-center">
             <EditExpense expense={row.original} />
             <DeleteExpense id={row.original.id} />

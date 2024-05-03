@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import {
@@ -18,8 +19,15 @@ import { useForm } from 'react-hook-form'
 import { generateExpenseExampleMessage } from '@/lib/utils'
 import { addExpense } from '@/actions/add_expense'
 import { Menu } from 'lucide-react'
+import { useFormState } from 'react-dom'
+
+const initialState = {
+  message: '',
+}
 
 export function AddExpense() {
+  const [state, formAction] = useFormState(addExpense, initialState)
+
   const [open, setIsOpen] = useState(false)
 
   const [expenseExample, setExpenseExample] = useState(() =>
@@ -42,10 +50,15 @@ export function AddExpense() {
   })
 
   const onSubmit = (data: Expense) => {
-    addExpense(data)
-    setIsOpen(false)
-    form.reset()
+    formAction(data)
   }
+
+  useEffect(() => {
+    if (state.message === 'Expense added successfully.') {
+      setIsOpen(false)
+      form.reset()
+    }
+  }, [state])
 
   return (
     <Dialog open={open} onOpenChange={setIsOpen}>

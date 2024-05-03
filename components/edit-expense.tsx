@@ -19,12 +19,19 @@ import { generateExpenseExampleMessage } from '@/lib/utils'
 import { Pencil } from 'lucide-react'
 import { SelectExpense } from '@/db/schema'
 import { editExpense } from '@/actions/edit_expense'
+import { useFormState } from 'react-dom'
 
 interface Props {
   expense: SelectExpense
 }
 
+const initialState = {
+  message: '',
+}
+
 export function EditExpense({ expense }: Props) {
+  const [state, formAction] = useFormState(editExpense, initialState)
+
   const [open, setIsOpen] = useState(false)
 
   const [expenseExample, setExpenseExample] = useState(() =>
@@ -42,15 +49,20 @@ export function EditExpense({ expense }: Props) {
   })
 
   const onSubmit = (data: SelectExpense) => {
-    editExpense({ ...data, id: expense.id, createdAt: expense.createdAt })
-    setIsOpen(false)
-    form.reset(
-      {},
-      {
-        keepValues: true,
-      },
-    )
+    formAction({ ...data, id: expense.id, createdAt: expense.createdAt })
   }
+
+  useEffect(() => {
+    if (state.message === 'Expense editted successfully.') {
+      setIsOpen(false)
+      form.reset(
+        {},
+        {
+          keepValues: true,
+        },
+      )
+    }
+  }, [state])
 
   return (
     <Dialog open={open} onOpenChange={setIsOpen}>
@@ -59,7 +71,7 @@ export function EditExpense({ expense }: Props) {
           <Pencil className="text-purple-400" size={16} />
         </button>
       </DialogTrigger>
-      <DialogContent className="bg-gray-800 text-white border-none">
+      <DialogContent className="bg-gray-800 max-w-[90%] xl:max-w-lg text-white border-none">
         <DialogHeader>
           <DialogTitle>Editar despesa</DialogTitle>
           <DialogDescription className="text-white text-sm font-extralight">
