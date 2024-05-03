@@ -1,22 +1,18 @@
 import { Trash } from 'lucide-react'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { PopoverClose } from '@radix-ui/react-popover'
 import { Button } from './ui/button'
-import { useExpenseStore } from '@/store/expense-store'
+import { deleteExpense } from '@/actions/delete_expense'
 
 interface Props {
   id: string
 }
 
 export function DeleteExpense({ id }: Props) {
-  const { handleDeleteExpense, totalExpenses } = useExpenseStore()
-
   const [isOpen, setIsOpen] = useState(false)
 
-  useEffect(() => {
-    setIsOpen(false)
-  }, [totalExpenses])
+  const deleteExpenseWithId = deleteExpense.bind(null, id)
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -43,9 +39,11 @@ export function DeleteExpense({ id }: Props) {
               Não
             </Button>
           </PopoverClose>
-          <Button className="h-[28px]" onClick={() => handleDeleteExpense(id)}>
-            Sim
-          </Button>
+          <form action={deleteExpenseWithId}>
+            <Button className="h-[28px]" type="submit">
+              Sim
+            </Button>
+          </form>
         </div>
       </PopoverContent>
     </Popover>
