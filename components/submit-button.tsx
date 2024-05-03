@@ -1,25 +1,23 @@
 'use client'
 
-import { useFormStatus } from 'react-dom'
 import { Button } from './ui/button'
 import { Loader } from 'lucide-react'
 
 interface Props {
+  isPending: boolean
   text?: string
 }
 
-export function SubmitButton({ text = 'Enviar' }: Props) {
-  const { pending } = useFormStatus()
-
+export function SubmitButton({ text = 'Enviar', isPending }: Props) {
   return (
     <Button
-      disabled={pending}
-      aria-disabled={pending}
-      className="w-full"
+      disabled={isPending}
+      aria-disabled={isPending}
+      className="w-full flex items-center gap-2"
       type="submit"
     >
       {text}
-      {pending && <Loader className="animate-spin w-4 h-4 ml-2" />}
+      {isPending && <Loader className="animate-spin w-4 h-4" />}
     </Button>
   )
 }

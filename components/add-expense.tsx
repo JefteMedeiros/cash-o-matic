@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dialog'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { ExpenseForm } from '@/components/expense-form'
 import { Category, Expense, expenseSchema } from '@/@types/expense'
 import { Form } from './ui/form'
@@ -20,6 +20,7 @@ import { generateExpenseExampleMessage } from '@/lib/utils'
 import { addExpense } from '@/actions/add_expense'
 import { Menu } from 'lucide-react'
 import { useFormState } from 'react-dom'
+import { SubmitButton } from './submit-button'
 
 const initialState = {
   message: '',
@@ -29,6 +30,8 @@ export function AddExpense() {
   const [state, formAction] = useFormState(addExpense, initialState)
 
   const [open, setIsOpen] = useState(false)
+
+  const [isPending, startTransition] = useTransition()
 
   const [expenseExample, setExpenseExample] = useState(() =>
     generateExpenseExampleMessage(),
@@ -50,7 +53,9 @@ export function AddExpense() {
   })
 
   const onSubmit = (data: Expense) => {
-    formAction(data)
+    startTransition(async () => {
+      formAction(data)
+    })
   }
 
   useEffect(() => {
@@ -77,10 +82,12 @@ export function AddExpense() {
         </DialogHeader>
         <Form {...form}>
           <form
+            id="add_expense"
             className="flex flex-col gap-4 text-gray-800"
             onSubmit={form.handleSubmit(onSubmit)}
           >
             <ExpenseForm />
+            <SubmitButton isPending={isPending} text="Adicionar" />
           </form>
         </Form>
       </DialogContent>

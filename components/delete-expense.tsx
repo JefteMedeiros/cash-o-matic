@@ -14,7 +14,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from './ui/alert-dialog'
-import { SubmitButton } from './submit-button'
+import { SubmitButtonAction } from './submit-button-action'
 
 interface Props {
   id: string
@@ -64,8 +64,8 @@ export function DeleteExpense({ id }: Props) {
               Não
             </Button>
           </AlertDialogCancel>
-          <form className="w-full" action={formAction}>
-            <SubmitButton text="Sim" />
+          <form id="delete_expense" className="w-full" action={formAction}>
+            <SubmitButtonAction id="delete_expense" text="Sim" />
           </form>
         </AlertDialogFooter>
       </AlertDialogContent>

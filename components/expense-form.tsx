@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/select'
 import { Expense } from '@/@types/expense'
 import { useFormContext } from 'react-hook-form'
-import { SubmitButton } from './submit-button'
 
 export function ExpenseForm() {
   const form = useFormContext<Expense>()
@@ -120,7 +119,6 @@ export function ExpenseForm() {
           </FormItem>
         )}
       />
-      <SubmitButton text="Salvar" />
     </>
   )
 }

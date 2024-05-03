@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
@@ -10,7 +11,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { ExpenseForm } from '@/components/expense-form'
 import { expenseSchema } from '@/@types/expense'
 import { Form } from './ui/form'
@@ -20,6 +21,7 @@ import { Pencil } from 'lucide-react'
 import { SelectExpense } from '@/db/schema'
 import { editExpense } from '@/actions/edit_expense'
 import { useFormState } from 'react-dom'
+import { SubmitButton } from './submit-button'
 
 interface Props {
   expense: SelectExpense
@@ -31,8 +33,8 @@ const initialState = {
 
 export function EditExpense({ expense }: Props) {
   const [state, formAction] = useFormState(editExpense, initialState)
-
   const [open, setIsOpen] = useState(false)
+  const [isPending, startTransition] = useTransition()
 
   const [expenseExample, setExpenseExample] = useState(() =>
     generateExpenseExampleMessage(),
@@ -49,7 +51,9 @@ export function EditExpense({ expense }: Props) {
   })
 
   const onSubmit = (data: SelectExpense) => {
-    formAction({ ...data, id: expense.id, createdAt: expense.createdAt })
+    startTransition(async () => {
+      formAction({ ...data, id: expense.id, createdAt: expense.createdAt })
+    })
   }
 
   useEffect(() => {
@@ -80,10 +84,12 @@ export function EditExpense({ expense }: Props) {
         </DialogHeader>
         <Form {...form}>
           <form
+            id="edit_expense"
             className="flex flex-col gap-4 text-gray-800"
             onSubmit={form.handleSubmit(onSubmit)}
           >
             <ExpenseForm />
+            <SubmitButton isPending={isPending} text="Salvar" />
           </form>
         </Form>
       </DialogContent>

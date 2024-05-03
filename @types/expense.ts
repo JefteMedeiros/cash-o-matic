@@ -20,15 +20,20 @@ export const typeEquivalent = {
 
 export const expenseSchema = z.object({
   name: z.string().min(1, { message: 'Este campo é obrigatório.' }),
-  category: z.enum([
-    'other',
-    'entertainment',
-    'food',
-    'transport',
-    'housing',
-    'health',
-    'education',
-  ]),
+  category: z.enum(
+    [
+      'other',
+      'entertainment',
+      'food',
+      'transport',
+      'housing',
+      'health',
+      'education',
+    ],
+    {
+      message: 'Este campo é obrigatório.',
+    },
+  ),
   value: z.coerce
     .number()
     .min(1, { message: 'Este campo é obrigatório.' })
