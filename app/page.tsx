@@ -3,8 +3,25 @@ import { AddExpense } from '@/components/add-expense'
 import { ExpenseResume } from '@/components/expense-resume'
 import { ExpenseTable } from '@/components/expense-table'
 import { Logo } from '@/components/logo'
+import { Skeleton } from '@/components/ui/skeleton'
 import { ExpenseProvider } from '@/store/expense-store'
 import { Suspense } from 'react'
+
+function Loading() {
+  return (
+    <div className="flex flex-col gap-4 mt-4">
+      <div className="flex gap-2">
+        <Skeleton className="flex items-center px-4 justify-between gap-4 rounded-md w-full bg-gray-600 h-12 animate-pulse" />
+        <Skeleton className="flex items-center px-4 justify-between gap-4 rounded-md w-full bg-gray-600 h-12 animate-pulse" />
+        <Skeleton className="flex items-center px-4 justify-between gap-4 rounded-md w-full bg-gray-600 h-12 animate-pulse" />
+      </div>
+      <Skeleton className="flex items-center px-4 justify-between gap-4 rounded-md w-full bg-gray-600 h-20 animate-pulse" />
+      <Skeleton className="flex items-center px-4 justify-between gap-4 rounded-md w-full bg-gray-600 h-20 animate-pulse" />
+      <Skeleton className="flex items-center px-4 justify-between gap-4 rounded-md w-full bg-gray-600 h-20 animate-pulse" />
+      <Skeleton className="flex items-center px-4 justify-between gap-4 rounded-md w-full bg-gray-600 h-20 animate-pulse" />
+    </div>
+  )
+}
 
 export default async function Page() {
   const expenses = await getExpenses()
@@ -19,9 +36,11 @@ export default async function Page() {
           </div>
         </header>
         <ExpenseResume totalExpenses={expenses} />
-        <Suspense fallback={<p>Loading...</p>}>
-          <ExpenseTable />
-        </Suspense>
+        <main className="max-w-[1260px] mx-auto mt-16">
+          <Suspense fallback={<Loading />}>
+            <ExpenseTable />
+          </Suspense>
+        </main>
       </ExpenseProvider>
     </div>
   )
