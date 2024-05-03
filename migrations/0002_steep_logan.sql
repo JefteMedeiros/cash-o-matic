@@ -1,1 +1,0 @@
-ALTER TABLE `expenses` RENAME COLUMN `isUnique` TO `is_unique`;

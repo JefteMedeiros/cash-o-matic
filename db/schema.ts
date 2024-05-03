@@ -4,7 +4,7 @@ import { integer, sqliteTable, text, real } from 'drizzle-orm/sqlite-core'
 export const expenses = sqliteTable('expenses', {
   id: text('id').primaryKey().notNull(),
   name: text('name').notNull(),
-  date: text('date').default(sql`(CURRENT_DATE)`),
+  date: text('date').notNull(),
   value: real('value').notNull(),
   category: text('category').notNull(),
   isUnique: integer('is_unique', { mode: 'boolean' }).notNull(),

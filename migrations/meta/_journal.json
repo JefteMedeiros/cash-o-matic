@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1714696455278,
-      "tag": "0000_chunky_bug",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1714697158191,
-      "tag": "0001_awesome_pete_wisdom",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1714697241626,
-      "tag": "0002_steep_logan",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1714697768192,
-      "tag": "0003_eminent_microbe",
+      "when": 1714715359143,
+      "tag": "0000_windy_mandrill",
       "breakpoints": true
     }
   ]

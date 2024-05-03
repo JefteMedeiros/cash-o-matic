@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "a5b4b7a4-e093-402f-80e2-1a1fdc35722c",
+  "id": "8fb27bda-bafa-4565-9d64-ea0306a77d8e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "expenses": {
@@ -21,6 +21,13 @@
           "notNull": true,
           "autoincrement": false
         },
+        "date": {
+          "name": "date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "value": {
           "name": "value",
           "type": "real",
@@ -35,8 +42,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "boolean": {
-          "name": "boolean",
+        "is_unique": {
+          "name": "is_unique",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,

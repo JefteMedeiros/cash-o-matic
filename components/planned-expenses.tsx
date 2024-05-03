@@ -35,7 +35,7 @@ export function PlannedExpenses({
 
   const greetingMessage =
     isFirstAccess && isFirstAccess === 'true'
-      ? 'Olá, seja bem-vindo ao Cash-o-matic'
+      ? 'Olá, seja bem-vindo ao Money Trakr!'
       : 'Valor de despesas planejadas'
 
   const handleChangeValue = (event: ChangeEvent<HTMLInputElement>) => {

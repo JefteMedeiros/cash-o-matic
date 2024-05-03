@@ -9,7 +9,7 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: 'Cash-o-matic',
+  title: 'Money Trakr',
   description: 'O seu app de gestão financeira!',
 }
 

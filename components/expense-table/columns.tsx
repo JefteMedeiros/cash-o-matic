@@ -6,6 +6,7 @@ import { ArrowUpDown } from 'lucide-react'
 import { EditExpense } from '../edit-expense'
 import { DeleteExpense } from '../delete-expense'
 import { SelectExpense } from '@/db/schema'
+import { format } from 'date-fns'
 
 export const columns: ColumnDef<SelectExpense>[] = [
   {
@@ -50,7 +51,7 @@ export const columns: ColumnDef<SelectExpense>[] = [
       )
     },
     cell: ({ row }) => {
-      return <div>{new Date(row.original.date as string).toDateString()}</div>
+      return <div>{format(new Date(row.original.date), 'PPP')}</div>
     },
   },
   {

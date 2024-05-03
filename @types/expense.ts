@@ -15,25 +15,7 @@ export const typeEquivalent = {
   false: false,
 }
 
-export const expenseSchemaOutput = z.object({
-  name: z.string().min(1, { message: 'Este campo é obrigatório.' }),
-  category: z
-    .enum([
-      'other',
-      'entertainment',
-      'food',
-      'transport',
-      'housing',
-      'health',
-      'education',
-    ])
-    .transform((value) => categoryEquivalent[value]),
-  value: z.coerce.number().min(1, { message: 'Este campo é obrigatório.' }),
-  date: z.string(),
-  isUnique: z.enum(['true', 'false']).transform((e) => typeEquivalent[e]),
-})
-
-export const expenseSchemaInput = z.object({
+export const expenseSchema = z.object({
   name: z.string().min(1, { message: 'Este campo é obrigatório.' }),
   category: z.enum([
     'other',
@@ -46,11 +28,7 @@ export const expenseSchemaInput = z.object({
   ]),
   value: z.coerce.number().min(1, { message: 'Este campo é obrigatório.' }),
   date: z.string(),
-  isUnique: z.enum(['true', 'false']),
+  isUnique: z.boolean(),
 })
 
-export const validOutputExpenseData =
-  expenseSchemaInput.pipe(expenseSchemaOutput)
-
-export type ExpenseInput = z.infer<typeof expenseSchemaInput>
-export type ExpenseOutput = z.infer<typeof expenseSchemaOutput>
+export type Expense = z.infer<typeof expenseSchema>
