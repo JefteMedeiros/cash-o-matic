@@ -32,6 +32,7 @@ export function ExpenseForm() {
               <Input
                 className="bg-gray-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
                 placeholder="Nome"
+                maxLength={40}
                 {...field}
               />
             </FormControl>
@@ -47,7 +48,7 @@ export function ExpenseForm() {
             <Select onValueChange={field.onChange} defaultValue={field.value}>
               <FormControl>
                 <SelectTrigger className="bg-gray-900 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-gray-800  focus:ring-purple-400">
-                  <SelectValue placeholder="Select a verified email to display" />
+                  <SelectValue placeholder="Selecione uma categoria" />
                 </SelectTrigger>
               </FormControl>
               <SelectContent className="bg-gray-900 text-white border-none">
@@ -67,7 +68,7 @@ export function ExpenseForm() {
       <FormField
         control={form.control}
         name="value"
-        render={({ field }) => (
+        render={() => (
           <FormItem>
             <FormControl>
               <Input
@@ -75,7 +76,10 @@ export function ExpenseForm() {
                 className="bg-gray-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
                 type="number"
                 placeholder="Valor"
-                {...field}
+                {...form.register('value', {
+                  setValueAs: (value: any) =>
+                    value === '' || value === null ? null : Number(value),
+                })}
               />
             </FormControl>
             <FormMessage />

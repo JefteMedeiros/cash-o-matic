@@ -28,7 +28,7 @@ export function ExpenseResume({ totalExpenses }: Props) {
   const remainingValue = plannedExpenseValue - totalSpent
 
   return (
-    <nav className="grid grid-cols-3 gap-8 max-w-[1260px] -my-12 mx-auto">
+    <nav className="grid grid-cols-3 gap-8 max-w-[90%] xl:max-w-[1260px] -my-12 mx-auto">
       <div className="flex flex-col items-start justify-center gap-4 bg-gray-700 rounded-md h-36 p-6">
         <span className="text-white">Total planejado</span>
         <div className="flex items-center gap-2">

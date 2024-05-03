@@ -1,3 +1,4 @@
+import { moneyFormatter } from '@/lib/utils'
 import * as z from 'zod'
 
 export const categoryEquivalent = {
@@ -28,7 +29,12 @@ export const expenseSchema = z.object({
     'health',
     'education',
   ]),
-  value: z.coerce.number().min(1, { message: 'Este campo é obrigatório.' }),
+  value: z.coerce
+    .number()
+    .min(1, { message: 'Este campo é obrigatório.' })
+    .max(9999999, {
+      message: `O valor máximo é de ${moneyFormatter(9999999.99)}`,
+    }),
   date: z.string(),
   isUnique: z.boolean(),
 })
