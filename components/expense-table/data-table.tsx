@@ -47,7 +47,7 @@ export function DataTable<TData, TValue>({
   const searchParams = new URLSearchParams(readonlyParams)
 
   const [searchByName, setSearchByName] = useState(
-    searchParams.get('nome') || '',
+    searchParams.get('name') || '',
   )
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
@@ -72,9 +72,9 @@ export function DataTable<TData, TValue>({
 
   useEffect(() => {
     if (searchByName.length > 0) {
-      searchParams.set('nome', searchByName)
+      searchParams.set('name', searchByName)
     } else if (searchByName.length === 0) {
-      searchParams.delete('nome')
+      searchParams.delete('name')
     }
 
     const timeout = setTimeout(() => {

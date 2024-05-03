@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getExpenses } from '@/actions/get_expenses'
 import { AddExpense } from '@/components/add-expense'
 import { ExpenseResume } from '@/components/expense-resume'
@@ -22,8 +23,16 @@ function Loading() {
   )
 }
 
-export default async function Page() {
-  const expenses = await getExpenses()
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
+  const queryParams = new URLSearchParams(searchParams as any).toString()
+
+  const expenses = await getExpenses(queryParams)
 
   return (
     <div className="bg-gray-800 min-h-[100dvh] w-full">
@@ -35,8 +44,8 @@ export default async function Page() {
       </header>
       <ExpenseResume totalExpenses={expenses} />
       <main className="max-w-[90%] xl:max-w-[1260px] mx-auto mt-16">
-        <Suspense fallback={<Loading />}>
-          <ExpenseTable />
+        <Suspense key={queryParams} fallback={<Loading />}>
+          <ExpenseTable queryParams={queryParams} />
         </Suspense>
       </main>
     </div>
