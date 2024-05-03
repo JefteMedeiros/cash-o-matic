@@ -6,7 +6,7 @@ export const expenses = sqliteTable('expenses', {
   name: text('name').notNull(),
   value: real('value').notNull(),
   category: text('category').notNull(),
-  isUnique: integer('boolean', { mode: 'boolean' }).notNull(),
+  isUnique: integer('is_unique', { mode: 'boolean' }).notNull(),
   createdAt: text('created_at')
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),

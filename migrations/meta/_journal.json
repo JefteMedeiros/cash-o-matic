@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1714696455278,
+      "tag": "0000_chunky_bug",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1714697158191,
+      "tag": "0001_awesome_pete_wisdom",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1714697241626,
+      "tag": "0002_steep_logan",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `expenses` RENAME COLUMN `boolean` TO `isUnique`;
