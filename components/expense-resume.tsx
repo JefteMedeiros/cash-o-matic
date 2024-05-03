@@ -3,11 +3,13 @@
 import { cn, moneyFormatter } from '@/lib/utils'
 import { PlannedExpenses } from './planned-expenses'
 import { useLocalStorage } from 'usehooks-ts'
-import { useExpenseStore } from '@/store/expense-store'
+import { SelectExpense } from '@/db/schema'
 
-export function ExpenseResume() {
-  const { totalExpenses } = useExpenseStore()
+interface Props {
+  totalExpenses: SelectExpense[]
+}
 
+export function ExpenseResume({ totalExpenses }: Props) {
   const [plannedExpenseValue, setPlannedExpenseValue] = useLocalStorage(
     'plannedExpenseValue',
     0,
@@ -18,7 +20,10 @@ export function ExpenseResume() {
     setPlannedExpenseValue(value)
   }
 
-  const totalSpent = totalExpenses.reduce((acc, value) => acc + value.amount, 0)
+  const totalSpent = totalExpenses.reduce(
+    (acc, expense) => acc + expense.value,
+    0,
+  )
 
   const remainingValue = plannedExpenseValue - totalSpent
 

@@ -44,6 +44,7 @@ export function AddExpense() {
   const onSubmit = (data: ExpenseInput) => {
     addExpense(data)
     setIsOpen(false)
+    form.reset()
   }
 
   return (
