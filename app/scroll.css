@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-scroll::-webkit-scrollbar {
+  @apply w-[10px] h-3;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  @apply rounded-lg bg-gray-900;
+}
+ 
+.custom-scroll::-webkit-scrollbar-thumb {
+  @apply rounded-lg bg-gray-700;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-600;
+}

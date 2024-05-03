@@ -28,11 +28,11 @@ export function ExpenseResume({ totalExpenses }: Props) {
   const remainingValue = plannedExpenseValue - totalSpent
 
   return (
-    <nav className="grid grid-cols-3 gap-8 max-w-[90%] xl:max-w-[1260px] -my-12 mx-auto">
-      <div className="flex flex-col items-start justify-center gap-4 bg-gray-700 rounded-md h-36 p-6">
+    <nav className="snap-x flex gap-8 max-w-[90%] xl:max-w-[1260px] -my-12 mx-auto overflow-auto custom-scroll pb-2">
+      <div className="snap-center flex flex-col items-start shrink-0 w-64 md:flex-1 md:w-full justify-center gap-4 bg-gray-700 rounded-md h-32 md:h-36 p-6">
         <span className="text-white">Total planejado</span>
         <div className="flex items-center gap-2">
-          <p className="font-bold text-3xl text-white">
+          <p className="font-bold text-2xl md:text-3xl text-white">
             {moneyFormatter(plannedExpenseValue)}
           </p>
           <PlannedExpenses
@@ -41,10 +41,10 @@ export function ExpenseResume({ totalExpenses }: Props) {
           />
         </div>
       </div>
-      <div className="flex flex-col items-start justify-center gap-4 bg-gray-700 rounded-md h-36 p-6">
+      <div className="snap-center flex flex-col items-start shrink-0 w-64 md:flex-1 md:w-full justify-center gap-4 bg-gray-700 rounded-md h-36 p-6">
         <span className="text-white">Total gasto</span>
         <p
-          className={cn('font-bold text-3xl text-white', {
+          className={cn('font-bold text-2xl md:text-3xl text-white', {
             'text-green-500': totalSpent > plannedExpenseValue / 3,
             'text-red-500': totalSpent > plannedExpenseValue,
           })}
@@ -52,10 +52,10 @@ export function ExpenseResume({ totalExpenses }: Props) {
           {moneyFormatter(totalSpent)}
         </p>
       </div>
-      <div className="flex flex-col items-start justify-center gap-4 bg-gray-700 rounded-md h-36 p-6">
+      <div className="snap-center flex flex-col items-start shrink-0 w-64 md:flex-1 md:w-full justify-center gap-4 bg-gray-700 rounded-md h-36 p-6">
         <span className="text-white">Total restante</span>
         <p
-          className={cn('font-bold text-3xl text-white', {
+          className={cn('font-bold text-2xl md:text-3xl text-white', {
             'text-green-500': remainingValue > 0,
             'text-red-500': remainingValue < 0,
           })}
