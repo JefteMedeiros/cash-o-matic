@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 
 import {
@@ -21,7 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import {
   Select,
   SelectContent,
@@ -29,6 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -39,8 +41,20 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const router = useRouter()
+  const path = usePathname()
+  const readonlyParams = useSearchParams()
+  const searchParams = new URLSearchParams(readonlyParams)
+
+  const [searchByName, setSearchByName] = useState(
+    searchParams.get('nome') || '',
+  )
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
+
+  function handleSearchByName(event: ChangeEvent<HTMLInputElement>) {
+    setSearchByName(event.target.value)
+  }
 
   const table = useReactTable({
     data,
@@ -56,25 +70,37 @@ export function DataTable<TData, TValue>({
     },
   })
 
+  useEffect(() => {
+    if (searchByName.length > 0) {
+      searchParams.set('nome', searchByName)
+    } else if (searchByName.length === 0) {
+      searchParams.delete('nome')
+    }
+
+    const timeout = setTimeout(() => {
+      router.replace(`${path}?${searchParams.toString()}`)
+    }, 350)
+
+    return () => clearTimeout(timeout)
+  }, [searchByName])
+
   return (
     <div className="rounded-md">
       <div className="grid grid-cols-3 gap-2 py-4">
         <Input
           placeholder="Filtrar por nome"
-          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('name')?.setFilterValue(event.target.value)
-          }
+          value={searchByName}
+          onChange={handleSearchByName}
           className="bg-gray-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
         />
         <Select
-          value={
-            (table.getColumn('category')?.getFilterValue() as string) ?? ''
-          }
+          value={searchParams.get('category') ?? ''}
           onValueChange={(value) => {
             value === 'all'
-              ? table.getColumn('category')?.setFilterValue('')
-              : table.getColumn('category')?.setFilterValue(value)
+              ? searchParams.delete('category')
+              : searchParams.set('category', value)
+
+            router.replace(`${path}?${searchParams.toString()}`)
           }}
           defaultValue="all"
         >
@@ -96,8 +122,10 @@ export function DataTable<TData, TValue>({
           value={(table.getColumn('type')?.getFilterValue() as string) ?? ''}
           onValueChange={(value) => {
             value === 'all'
-              ? table.getColumn('type')?.setFilterValue('')
-              : table.getColumn('type')?.setFilterValue(value)
+              ? searchParams.delete('type')
+              : searchParams.set('type', value)
+
+            router.replace(`${path}?${searchParams.toString()}`)
           }}
           defaultValue="all"
         >
