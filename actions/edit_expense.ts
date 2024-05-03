@@ -15,6 +15,8 @@ export async function editExpense(formData: SelectExpense) {
     }
   }
 
+  console.log('formData', formData)
+
   await db.update(expenses).set(formData).where(eq(expenses.id, formData.id))
 
   revalidatePath('/')

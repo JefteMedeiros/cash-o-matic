@@ -42,7 +42,7 @@ export function EditExpense({ expense }: Props) {
   })
 
   const onSubmit = (data: SelectExpense) => {
-    editExpense(data)
+    editExpense({ ...data, id: expense.id, createdAt: expense.createdAt })
     setIsOpen(false)
     form.reset(
       {},
