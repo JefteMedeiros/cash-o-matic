@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import {
@@ -11,40 +12,53 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { ExpenseForm } from '@/components/expense-form'
-import { Expense, expenseSchema } from '@/@types/expense'
+import {
+  ExpenseInput,
+  categoryEquivalent,
+  expenseSchemaInput,
+  validOutputExpenseData,
+} from '@/@types/expense'
 import { Form } from './ui/form'
 import { useForm } from 'react-hook-form'
-import { useExpenseStore } from '@/store/expense-store'
 import { generateExpenseExampleMessage } from '@/lib/utils'
 import { Pencil } from 'lucide-react'
+import { SelectExpense } from '@/db/schema'
+import { editExpense } from '@/actions/edit_expense'
 
 interface Props {
-  expense: Expense
+  expense: SelectExpense
 }
 
 export function EditExpense({ expense }: Props) {
-  const { handleEditExpense } = useExpenseStore()
-
   const [open, setIsOpen] = useState(false)
 
   const [expenseExample, setExpenseExample] = useState(() =>
     generateExpenseExampleMessage(),
   )
 
-  // Troca a mensagem a cada vez que o modal é aberto
-
   useEffect(() => {
     if (!open) return
     setExpenseExample(generateExpenseExampleMessage())
   }, [open])
 
-  const form = useForm<Expense>({
-    defaultValues: { ...expense, date: new Date(expense.date) },
-    resolver: zodResolver(expenseSchema),
+  const parsedCategory = Object.entries(categoryEquivalent).find(
+    ([key, value]) => value === expense.category,
+  )![0] as keyof typeof categoryEquivalent
+
+  const form = useForm<ExpenseInput>({
+    defaultValues: {
+      ...expense,
+      category: parsedCategory,
+      isUnique: expense.isUnique ? 'true' : 'false',
+      date: new Date(expense.date!).toISOString(),
+    },
+    resolver: zodResolver(expenseSchemaInput),
   })
 
-  const onSubmit = (data: Expense) => {
-    handleEditExpense(data)
+  const onSubmit = (data: ExpenseInput) => {
+    const parsedData = validOutputExpenseData.parse(data)
+
+    editExpense({ ...parsedData, id: expense.id, createdAt: expense.createdAt })
     setIsOpen(false)
     form.reset(
       {},
