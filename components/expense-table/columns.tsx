@@ -3,10 +3,12 @@
 import { moneyFormatter } from '@/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
-import { EditExpense } from '../edit-expense'
+import { ptBR } from 'date-fns/locale'
 import { DeleteExpense } from '../delete-expense'
 import { SelectExpense } from '@/db/schema'
 import { format } from 'date-fns'
+import { Category, categoryEquivalent } from '@/@types/expense'
+import { EditExpense } from '../edit-expense'
 
 export const columns: ColumnDef<SelectExpense>[] = [
   {
@@ -17,7 +19,7 @@ export const columns: ColumnDef<SelectExpense>[] = [
     accessorKey: 'category',
     header: 'Categoria',
     cell: ({ row }) => {
-      return <div>{row.original.category}</div>
+      return <div>{categoryEquivalent[row.original.category as Category]}</div>
     },
   },
   {
@@ -51,7 +53,13 @@ export const columns: ColumnDef<SelectExpense>[] = [
       )
     },
     cell: ({ row }) => {
-      return <div>{format(new Date(row.original.date), 'PPP')}</div>
+      return (
+        <div>
+          {format(new Date(row.original.date), 'PPP', {
+            locale: ptBR,
+          })}
+        </div>
+      )
     },
   },
   {

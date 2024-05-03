@@ -1,12 +1,12 @@
 'use server'
 
-import { ExpenseInput, validOutputExpenseData } from '@/@types/expense'
+import { Expense, expenseSchema } from '@/@types/expense'
 import { db } from '@/db/db'
 import { expenses } from '@/db/schema'
 import { revalidatePath } from 'next/cache'
 
-export async function addExpense(formData: ExpenseInput) {
-  const validFormData = validOutputExpenseData.safeParse(formData)
+export async function addExpense(formData: Expense) {
+  const validFormData = expenseSchema.safeParse(formData)
 
   if (!validFormData.success) {
     return {

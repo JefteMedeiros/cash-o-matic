@@ -15,11 +15,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { ExpenseInput } from '@/@types/expense'
+import { Expense } from '@/@types/expense'
 import { useFormContext } from 'react-hook-form'
 
 export function ExpenseForm() {
-  const form = useFormContext<ExpenseInput>()
+  const form = useFormContext<Expense>()
 
   return (
     <>
@@ -90,8 +90,8 @@ export function ExpenseForm() {
             <FormLabel className="text-white">Tipo de despesa</FormLabel>
             <FormControl>
               <RadioGroup
-                onValueChange={field.onChange}
-                defaultValue={field.value}
+                onValueChange={(value) => field.onChange(value === 'true')}
+                defaultValue={field.value ? 'true' : 'false'}
                 className="flex flex-col space-y-1"
               >
                 <FormItem className="flex items-center space-x-3 space-y-0">

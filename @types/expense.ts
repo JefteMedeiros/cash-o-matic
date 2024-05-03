@@ -10,6 +10,8 @@ export const categoryEquivalent = {
   education: 'Educação',
 }
 
+export type Category = keyof typeof categoryEquivalent
+
 export const typeEquivalent = {
   true: true,
   false: false,

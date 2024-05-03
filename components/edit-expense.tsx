@@ -12,12 +12,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import { ExpenseForm } from '@/components/expense-form'
-import {
-  ExpenseInput,
-  categoryEquivalent,
-  expenseSchemaInput,
-  validOutputExpenseData,
-} from '@/@types/expense'
+import { expenseSchema } from '@/@types/expense'
 import { Form } from './ui/form'
 import { useForm } from 'react-hook-form'
 import { generateExpenseExampleMessage } from '@/lib/utils'
@@ -41,24 +36,13 @@ export function EditExpense({ expense }: Props) {
     setExpenseExample(generateExpenseExampleMessage())
   }, [open])
 
-  const parsedCategory = Object.entries(categoryEquivalent).find(
-    ([key, value]) => value === expense.category,
-  )![0] as keyof typeof categoryEquivalent
-
-  const form = useForm<ExpenseInput>({
-    defaultValues: {
-      ...expense,
-      category: parsedCategory,
-      isUnique: expense.isUnique ? 'true' : 'false',
-      date: new Date(expense.date!).toISOString(),
-    },
-    resolver: zodResolver(expenseSchemaInput),
+  const form = useForm<SelectExpense>({
+    defaultValues: expense,
+    resolver: zodResolver(expenseSchema),
   })
 
-  const onSubmit = (data: ExpenseInput) => {
-    const parsedData = validOutputExpenseData.parse(data)
-
-    editExpense({ ...parsedData, id: expense.id, createdAt: expense.createdAt })
+  const onSubmit = (data: SelectExpense) => {
+    editExpense(data)
     setIsOpen(false)
     form.reset(
       {},

@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { useEffect, useState } from 'react'
 import { ExpenseForm } from '@/components/expense-form'
-import { ExpenseInput, expenseSchemaInput } from '@/@types/expense'
+import { Expense, expenseSchema } from '@/@types/expense'
 import { Form } from './ui/form'
 import { useForm } from 'react-hook-form'
 import { generateExpenseExampleMessage } from '@/lib/utils'
@@ -30,18 +30,18 @@ export function AddExpense() {
     setExpenseExample(generateExpenseExampleMessage())
   }, [open])
 
-  const form = useForm<ExpenseInput>({
+  const form = useForm<Expense>({
     defaultValues: {
       name: '',
       category: 'other',
       value: 0,
       date: new Date().toISOString(),
-      isUnique: 'false',
+      isUnique: false,
     },
-    resolver: zodResolver(expenseSchemaInput),
+    resolver: zodResolver(expenseSchema),
   })
 
-  const onSubmit = (data: ExpenseInput) => {
+  const onSubmit = (data: Expense) => {
     addExpense(data)
     setIsOpen(false)
     form.reset()
