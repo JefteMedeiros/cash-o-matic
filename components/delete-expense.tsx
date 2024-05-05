@@ -47,7 +47,7 @@ export function DeleteExpense({ id }: Props) {
         <AlertDialogHeader className="items-start">
           <AlertDialogTitle>Deletar despesa</AlertDialogTitle>
           <AlertDialogDescription className="text-white text-sm font-extralight">
-            Tem certeza que deseja deletar essa despesa?
+            Tem certeza que deseja deletar esta despesa?
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

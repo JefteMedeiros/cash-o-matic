@@ -76,7 +76,7 @@ export function EditExpense({ expense }: Props) {
         </button>
       </DialogTrigger>
       <DialogContent className="bg-gray-800 max-w-[90%] xl:max-w-lg text-white border-none">
-        <DialogHeader>
+        <DialogHeader className="items-start">
           <DialogTitle>Editar despesa</DialogTitle>
           <DialogDescription className="text-white text-sm font-extralight">
             {expenseExample}

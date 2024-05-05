@@ -58,8 +58,8 @@ export function PlannedExpenses({
           <Pencil className="text-purple-400" />
         </button>
       </DialogTrigger>
-      <DialogContent className="bg-gray-800 text-white border-none">
-        <DialogHeader>
+      <DialogContent className="bg-gray-800 max-w-[90%] xl:max-w-lg text-white border-none">
+        <DialogHeader className="items-start">
           <DialogTitle>{greetingMessage}</DialogTitle>
           <DialogDescription className="text-white text-sm font-extralight">
             Adicione no campo abaixo o quanto você planeja gastar

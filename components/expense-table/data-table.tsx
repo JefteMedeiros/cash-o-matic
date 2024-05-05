@@ -91,7 +91,7 @@ export function DataTable<TData, TValue>({
           placeholder="Filtrar por nome"
           value={searchByName}
           onChange={handleSearchByName}
-          className="bg-gray-900 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
+          className="bg-gray-900 text-ellipsis text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
         />
         <Select
           value={searchParams.get('category') ?? ''}
