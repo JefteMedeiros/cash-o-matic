@@ -3,10 +3,8 @@
 import { moneyFormatter } from '@/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
-import { ptBR } from 'date-fns/locale'
 import { DeleteExpense } from '../delete-expense'
 import { SelectExpense } from '@/db/schema'
-import { format } from 'date-fns'
 import { Category, categoryEquivalent } from '@/@types/expense'
 import { EditExpense } from '../edit-expense'
 
@@ -55,8 +53,10 @@ export const columns: ColumnDef<SelectExpense>[] = [
     cell: ({ row }) => {
       return (
         <div>
-          {format(new Date(row.original.date), 'PPP', {
-            locale: ptBR,
+          {new Date(row.original.createdAt).toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
           })}
         </div>
       )
