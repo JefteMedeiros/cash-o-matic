@@ -1,7 +1,7 @@
 import type { Config } from 'drizzle-kit'
 
 export default {
-  schema: './db/schema.ts',
+  schema: ['./db/schemas/users.ts', './db/schemas/expenses.ts'],
   out: './migrations',
   driver: 'turso',
   dbCredentials: {
