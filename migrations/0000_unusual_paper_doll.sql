@@ -35,3 +35,15 @@ CREATE TABLE `verificationToken` (
 	`expires` integer NOT NULL,
 	PRIMARY KEY(`identifier`, `token`)
 );
+--> statement-breakpoint
+CREATE TABLE `expenses` (
+	`id` text PRIMARY KEY NOT NULL,
+	`name` text NOT NULL,
+	`date` text NOT NULL,
+	`value` real NOT NULL,
+	`category` text NOT NULL,
+	`is_unique` integer NOT NULL,
+	`user_id` text NOT NULL,
+	`created_at` text DEFAULT CURRENT_TIMESTAMP NOT NULL,
+	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
+);
