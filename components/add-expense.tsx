@@ -47,7 +47,7 @@ export function AddExpense() {
       name: '',
       category: '' as Category,
       date: new Date().toISOString(),
-      isUnique: false,
+      isUnique: true,
     },
     resolver: zodResolver(expenseSchema),
   })

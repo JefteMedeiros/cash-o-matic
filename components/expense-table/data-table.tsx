@@ -84,6 +84,9 @@ export function DataTable<TData, TValue>({
     return () => clearTimeout(timeout)
   }, [searchByName])
 
+  const category = searchParams.get('category')
+  const type = searchParams.get('type')
+
   return (
     <div className="rounded-md">
       <div className="grid grid-cols-3 gap-2 py-4">
@@ -94,7 +97,7 @@ export function DataTable<TData, TValue>({
           className="bg-gray-900 text-ellipsis text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
         />
         <Select
-          value={searchParams.get('category') ?? ''}
+          value={category ?? ''}
           onValueChange={(value) => {
             value === 'all'
               ? searchParams.delete('category')
@@ -119,7 +122,7 @@ export function DataTable<TData, TValue>({
           </SelectContent>
         </Select>
         <Select
-          value={(table.getColumn('type')?.getFilterValue() as string) ?? ''}
+          value={type ?? ''}
           onValueChange={(value) => {
             value === 'all'
               ? searchParams.delete('type')

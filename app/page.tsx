@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { getExpenses } from '@/actions/get_expenses'
+import { getExpense } from '@/actions/get_expense'
 import { AddExpense } from '@/components/add-expense'
 import { ExpenseResume } from '@/components/expense-resume'
 import { ExpenseTable } from '@/components/expense-table'
@@ -32,7 +32,7 @@ export default async function Page({
 }) {
   const queryParams = new URLSearchParams(searchParams as any).toString()
 
-  const expenses = await getExpenses(queryParams)
+  const expenses = await getExpense(queryParams)
 
   return (
     <div className="bg-gray-800 min-h-[100dvh] w-full">

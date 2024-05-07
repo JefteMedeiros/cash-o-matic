@@ -2,7 +2,7 @@ import { and, eq, like } from 'drizzle-orm'
 import { db } from '../db/db'
 import { expenses } from '@/db/schema'
 
-export async function getExpenses(queryParams: string) {
+export async function getExpense(queryParams: string) {
   const mutableParams = new URLSearchParams(queryParams)
 
   const name = mutableParams.get('name')
@@ -15,7 +15,7 @@ export async function getExpenses(queryParams: string) {
 
   const results = await dynamicExpenses.where(
     and(
-      name && name.length > 0 ? like(expenses.name, name) : undefined,
+      name && name.length > 0 ? like(expenses.name, `%${name}%`) : undefined,
       category && category.length > 0
         ? eq(expenses.category, category)
         : undefined,

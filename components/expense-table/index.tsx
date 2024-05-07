@@ -1,13 +1,13 @@
 import { DataTable } from './data-table'
 import { columns } from './columns'
-import { getExpenses } from '@/actions/get_expenses'
+import { getExpense } from '@/actions/get_expense'
 
 interface Props {
   queryParams: string
 }
 
 export async function ExpenseTable({ queryParams }: Props) {
-  const totalExpenses = await getExpenses(queryParams)
+  const totalExpenses = await getExpense(queryParams)
 
   return <DataTable columns={columns} data={totalExpenses} />
 }
