@@ -67,8 +67,8 @@ export function AddExpense() {
   return (
     <Dialog open={open} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className=" hover:bg-purple-400 bg-purple-500 px-4 py-2 h-12 flex-1">
-          Adicionar despesa
+        <Button className="hover:bg-purple-400 bg-purple-500 px-4 py-2 h-12 w-1/4">
+          <span className="truncate">Adicionar despesa</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-gray-800 max-w-[90%] xl:max-w-lg text-white border-none">
