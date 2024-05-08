@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { getExpense } from '@/actions/get_expense'
+import { auth } from '@/auth'
 import { AddExpense } from '@/components/add-expense'
 import { ExpenseResume } from '@/components/expense-resume'
 import { ExpenseTable } from '@/components/expense-table'
 import { Logo } from '@/components/logo'
+import { ProfileCard } from '@/components/profile-card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { redirect } from 'next/navigation'
 import { Suspense } from 'react'
 
 function Loading() {
@@ -34,12 +37,17 @@ export default async function Page({
 
   const expenses = await getExpense(queryParams)
 
+  const session = await auth()
+  if (!session) return redirect('/signin')
+
   return (
     <div className="bg-gray-800 min-h-[100dvh] w-full">
       <header className="pt-12 pb-24 bg-gray-900">
         <div className="flex items-center justify-between max-w-[90%] xl:max-w-[1260px] w-full mx-auto">
           <Logo />
-          <AddExpense />
+          <Suspense fallback={<p>Loading...</p>}>
+            <ProfileCard session={session} />
+          </Suspense>
         </div>
       </header>
       <ExpenseResume totalExpenses={expenses} />

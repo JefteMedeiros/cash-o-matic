@@ -31,6 +31,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { AddExpense } from '../add-expense'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -89,12 +90,12 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="rounded-md">
-      <div className="grid grid-cols-3 gap-2 py-4">
+      <div className="flex items-center gap-2 py-4">
         <Input
           placeholder="Filtrar por nome"
           value={searchByName}
           onChange={handleSearchByName}
-          className="bg-gray-900 text-ellipsis text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
+          className="bg-gray-900 flex-1 text-ellipsis text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
         />
         <Select
           value={category ?? ''}
@@ -107,7 +108,7 @@ export function DataTable<TData, TValue>({
           }}
           defaultValue="all"
         >
-          <SelectTrigger className="bg-gray-900 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-gray-800  focus:ring-purple-400">
+          <SelectTrigger className="bg-gray-900 flex-1 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-gray-800  focus:ring-purple-400">
             <SelectValue placeholder="Filtrar por categoria" />
           </SelectTrigger>
           <SelectContent className="bg-gray-900 text-white border-none">
@@ -132,7 +133,7 @@ export function DataTable<TData, TValue>({
           }}
           defaultValue="all"
         >
-          <SelectTrigger className="bg-gray-900 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-gray-800  focus:ring-purple-400">
+          <SelectTrigger className="bg-gray-900 flex-1 text-white h-12 border-none focus:ring-offset-1 focus:ring-2 focus:ring-offset-gray-800  focus:ring-purple-400">
             <SelectValue placeholder="Filtrar por tipo" />
           </SelectTrigger>
           <SelectContent className="bg-gray-900 text-white border-none">
@@ -141,6 +142,7 @@ export function DataTable<TData, TValue>({
             <SelectItem value="recurring">Despesa recorrente</SelectItem>
           </SelectContent>
         </Select>
+        <AddExpense />
       </div>
       <Table className="text-white">
         <TableHeader>

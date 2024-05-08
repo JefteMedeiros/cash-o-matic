@@ -18,7 +18,6 @@ import { Form } from './ui/form'
 import { useForm } from 'react-hook-form'
 import { generateExpenseExampleMessage } from '@/lib/utils'
 import { addExpense } from '@/actions/add_expense'
-import { Menu } from 'lucide-react'
 import { useFormState } from 'react-dom'
 import { SubmitButton } from './submit-button'
 
@@ -68,9 +67,8 @@ export function AddExpense() {
   return (
     <Dialog open={open} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="p-0 h-fit bg-transparent hover:bg-transparent md:hover:bg-purple-400 md:bg-purple-500 md:px-4 md:py-2 md:h-10">
-          <span className="hidden md:block">Adicionar despesa</span>
-          <Menu className="block md:hidden text-purple-500" size={32} />
+        <Button className=" hover:bg-purple-400 bg-purple-500 px-4 py-2 h-12 flex-1">
+          Adicionar despesa
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-gray-800 max-w-[90%] xl:max-w-lg text-white border-none">
