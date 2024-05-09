@@ -1,12 +1,21 @@
 'use server'
 
 import { expenseSchema } from '@/@types/expense'
+import { auth } from '@/auth'
 import { db } from '@/db/db'
-import { SelectExpense, expenses } from '@/db/schema'
+import { SelectExpense, expenses } from '@/db/schemas/expenses'
 import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 
 export async function editExpense(prevState: any, formData: SelectExpense) {
+  const session = await auth()
+
+  if (!session) {
+    return {
+      message: 'User not authenticated.',
+    }
+  }
+
   const validFormData = expenseSchema.safeParse(formData)
 
   if (!validFormData.success) {

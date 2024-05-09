@@ -26,14 +26,15 @@ export function ProfileCard({ session }: Props) {
           className="flex items-center gap-2 bg-gray-900 hover:bg-gray-700 hover:text-white px-3 text-white h-12 border-none focus-visible:ring-offset-1 focus-visible:ring-2 focus-visible:ring-offset-gray-800  focus-visible:ring-purple-400"
           variant="outline"
         >
-          <Image
-            referrerPolicy="no-referrer"
-            className="rounded-full w-10 h-10"
-            src={session?.user.image as string}
-            width={40}
-            height={40}
-            alt="User"
-          />
+          <div className="w-8 h-8 md:w-10 md:h-10 relative">
+            <Image
+              className="rounded-full"
+              referrerPolicy="no-referrer"
+              src={session?.user.image as string}
+              fill
+              alt="User"
+            />
+          </div>
           <span className="text-md">{session?.user?.name}</span>
         </Button>
       </DropdownMenuTrigger>

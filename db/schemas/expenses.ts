@@ -3,15 +3,15 @@ import { integer, sqliteTable, text, real } from 'drizzle-orm/sqlite-core'
 import { users } from './users'
 
 export const expenses = sqliteTable('expenses', {
-  id: text('id').primaryKey().notNull(),
+  id: text('id').primaryKey(),
   name: text('name').notNull(),
   date: text('date').notNull(),
   value: real('value').notNull(),
   category: text('category').notNull(),
   isUnique: integer('is_unique', { mode: 'boolean' }).notNull(),
   userId: text('user_id')
-    .notNull()
-    .references(() => users.id),
+    .references(() => users.id)
+    .notNull(),
   createdAt: text('created_at')
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),

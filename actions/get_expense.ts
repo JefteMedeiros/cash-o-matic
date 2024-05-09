@@ -1,8 +1,17 @@
 import { and, eq, like } from 'drizzle-orm'
 import { db } from '../db/db'
-import { expenses } from '@/db/schema'
+import { expenses } from '@/db/schemas/expenses'
+import { auth } from '@/auth'
 
 export async function getExpense(queryParams: string) {
+  const session = await auth()
+
+  if (!session) {
+    return {
+      message: 'User not authenticated.',
+    }
+  }
+
   const mutableParams = new URLSearchParams(queryParams)
 
   const name = mutableParams.get('name')
