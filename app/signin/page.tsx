@@ -3,9 +3,19 @@ import { Logo } from '@/components/logo'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 
-export default async function SignIn() {
+export default async function SignIn({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
   const session = await auth()
   if (session) return redirect('/')
+
+  const queryParams = new URLSearchParams(searchParams as any).toString()
+
+  const oauthAccountNotLinked = queryParams.includes('OAuthAccountNotLinked')
 
   return (
     <main className="bg-gray-900 w-screen h-screen flex flex-col items-center">
@@ -38,6 +48,11 @@ export default async function SignIn() {
             </form>
           ))}
         </div>
+        {oauthAccountNotLinked && (
+          <p className="mt-6 text-center text-red-400">
+            O e-mail utilizado nesta opção já foi associado a uma conta
+          </p>
+        )}
       </div>
     </main>
   )
