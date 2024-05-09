@@ -1,6 +1,6 @@
 'use server'
 
-import { eq } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { db } from '../db/db'
 import { revalidatePath } from 'next/cache'
 import { expenses } from '@/db/schemas/expenses'
@@ -14,7 +14,9 @@ export async function deleteExpense(id: string) {
     }
   }
 
-  await db.delete(expenses).where(eq(expenses.id, id))
+  await db
+    .delete(expenses)
+    .where(and(eq(expenses.id, id), eq(expenses.userId, session.user.id)))
 
   revalidatePath('/')
 

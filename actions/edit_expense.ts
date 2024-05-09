@@ -4,7 +4,7 @@ import { expenseSchema } from '@/@types/expense'
 import { auth } from '@/auth'
 import { db } from '@/db/db'
 import { SelectExpense, expenses } from '@/db/schemas/expenses'
-import { eq } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 
 export async function editExpense(prevState: any, formData: SelectExpense) {
@@ -24,7 +24,12 @@ export async function editExpense(prevState: any, formData: SelectExpense) {
     }
   }
 
-  await db.update(expenses).set(formData).where(eq(expenses.id, formData.id))
+  await db
+    .update(expenses)
+    .set(formData)
+    .where(
+      and(eq(expenses.id, formData.id), eq(expenses.userId, session.user.id)),
+    )
 
   revalidatePath('/')
 
