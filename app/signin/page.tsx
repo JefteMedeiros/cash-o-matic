@@ -8,8 +8,8 @@ export default async function SignIn() {
   if (session) return redirect('/')
 
   return (
-    <main className="bg-gray-900 w-screen h-screen">
-      <div className="flex flex-col items-center text-white absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-85%] max-w-96">
+    <main className="bg-gray-900 w-screen h-screen flex flex-col items-center">
+      <div className="flex flex-col items-center text-white max-w-96 mt-32 mx-6">
         <Logo />
         <p className="mt-12 text-center">
           Para continuar, faça login com uma das opções abaixo.
