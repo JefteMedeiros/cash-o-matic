@@ -2,8 +2,8 @@
 
 import { cn, moneyFormatter } from '@/lib/utils'
 import { PlannedExpenses } from './planned-expenses'
-import { SelectExpense } from '@/db/schema'
 import { useLocalStorage } from 'usehooks-ts'
+import { SelectExpense } from '@/db/schemas/expenses'
 
 interface Props {
   totalExpenses: SelectExpense[]

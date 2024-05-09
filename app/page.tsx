@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { getExpense } from '@/actions/get_expense'
 import { auth } from '@/auth'
-import { AddExpense } from '@/components/add-expense'
 import { ExpenseResume } from '@/components/expense-resume'
 import { ExpenseTable } from '@/components/expense-table'
 import { Logo } from '@/components/logo'

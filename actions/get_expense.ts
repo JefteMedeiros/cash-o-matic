@@ -2,14 +2,13 @@ import { and, eq, like } from 'drizzle-orm'
 import { db } from '../db/db'
 import { expenses } from '@/db/schemas/expenses'
 import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 
 export async function getExpense(queryParams: string) {
   const session = await auth()
 
   if (!session) {
-    return {
-      message: 'User not authenticated.',
-    }
+    return redirect('/signin')
   }
 
   const mutableParams = new URLSearchParams(queryParams)

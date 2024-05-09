@@ -6,14 +6,13 @@ import { db } from '@/db/db'
 import { SelectExpense, expenses } from '@/db/schemas/expenses'
 import { and, eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 export async function editExpense(prevState: any, formData: SelectExpense) {
   const session = await auth()
 
   if (!session) {
-    return {
-      message: 'User not authenticated.',
-    }
+    return redirect('/signin')
   }
 
   const validFormData = expenseSchema.safeParse(formData)

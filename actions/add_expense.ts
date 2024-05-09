@@ -5,14 +5,13 @@ import { auth } from '@/auth'
 import { db } from '@/db/db'
 import { expenses } from '@/db/schemas/expenses'
 import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 export async function addExpense(prevState: any, formData: Expense) {
   const session = await auth()
 
   if (!session) {
-    return {
-      message: 'User not authenticated.',
-    }
+    return redirect('/signin')
   }
 
   const validFormData = expenseSchema.safeParse(formData)

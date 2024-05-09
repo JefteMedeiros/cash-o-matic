@@ -39,18 +39,18 @@ export function ProfileCard({ session }: Props) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        align="end"
+        align="start"
         side="bottom"
-        className="w-56 bg-gray-900 border-purple-400 text-white"
+        className="w-56 bg-gray-900 border-gray-700 text-white"
       >
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator className="bg-purple-400" />
+        <DropdownMenuLabel>Minha conta</DropdownMenuLabel>
+        <DropdownMenuSeparator className="bg-gray-700" />
         <DropdownMenuItem
           className="hover:cursor-pointer focus:bg-gray-700 focus:text-white"
           onClick={() => signOut()}
         >
           <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
+          <span>Sair</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
