@@ -18,10 +18,10 @@ import { Form } from './ui/form'
 import { useForm } from 'react-hook-form'
 import { generateExpenseExampleMessage } from '@/lib/utils'
 import { Pencil } from 'lucide-react'
-import { SelectExpense } from '@/db/schema'
 import { editExpense } from '@/actions/edit_expense'
 import { useFormState } from 'react-dom'
 import { SubmitButton } from './submit-button'
+import { SelectExpense } from '@/db/schemas/expenses'
 
 interface Props {
   expense: SelectExpense

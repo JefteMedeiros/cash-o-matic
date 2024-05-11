@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { auth, providerMap, signIn } from '@/auth'
 import { Logo } from '@/components/logo'
 import Image from 'next/image'

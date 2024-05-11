@@ -4,9 +4,9 @@ import { moneyFormatter } from '@/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
 import { DeleteExpense } from '../delete-expense'
-import { SelectExpense } from '@/db/schema'
 import { Category, categoryEquivalent } from '@/@types/expense'
 import { EditExpense } from '../edit-expense'
+import { SelectExpense } from '@/db/schemas/expenses'
 
 export const columns: ColumnDef<SelectExpense>[] = [
   {
